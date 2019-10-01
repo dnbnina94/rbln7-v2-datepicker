@@ -227,7 +227,6 @@
                     this.selecting = true;
                 }
                 if (this.clickCount === 1) {
-                    console.log("Hello from 1click");
                     this.startDate = date;
                     this.endDate = '';                                      // HACK
                     this.$emit('emit', this.startDate, this.endDate);       // HACK
@@ -237,7 +236,6 @@
                     this.endDate = date;
                 }
 
-                console.log("Hello from 2click");
                 this.$emit('emit', this.startDate, this.endDate);
                 this.shown = false;
                 this.selecting = false;
