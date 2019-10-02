@@ -241,6 +241,8 @@
                 }
 
                 this.$emit('emit', this.startDate, this.endDate);
+                this.$refs.leftPanel.initDays()                             // HACK
+                this.$refs.rightPanel.initDays()                            // HACK
                 this.shown = false;
                 this.selecting = false;
                 this.clickCount = 0;
