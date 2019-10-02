@@ -27,6 +27,7 @@
                         </div>
                     </div>
                     <date-table
+                        ref="leftPanel"
                         :lang="lang"
                         :locals="customLocals"
                         :date="leftDate"
@@ -63,6 +64,7 @@
                         </div>
                     </div>
                     <date-table
+                        ref="rightPanel"
                         :lang="lang"
                         :locals="customLocals"
                         :date="rightDate"
@@ -230,6 +232,8 @@
                     this.startDate = date;
                     this.endDate = '';                                      // HACK
                     this.$emit('emit', this.startDate, this.endDate);       // HACK
+                    this.$refs.leftPanel.initDays()                         // HACK
+                    this.$refs.rightPanel.initDays()                        // HACK
                     return;
                 }
                 if (this.clickCount >= 2) {
