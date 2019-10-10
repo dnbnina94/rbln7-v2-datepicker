@@ -385,10 +385,20 @@
         cursor: default;
     }
     &.normal {
-        color: #333;
+        color: black;
         cursor: pointer;
         &:hover {
             color: #ff6200;
+        }
+        &.start-date {
+            &:hover {
+                background-color: black;
+            }
+        }
+        &.end-date {
+            &:hover {
+                background-color: black;
+            }
         }
     }
     &.today {
@@ -410,17 +420,19 @@
     &.start-date, &.end-date {
         span {
             color: #fff;
-            background: #ff6200;
-            border-radius: 50%;
+            background: black;
+            // border-radius: 50%;
         }
     }
     &.start-date {
-        border-top-left-radius: 22px;
-        border-bottom-left-radius: 22px;
+        background-color: black;
+        // border-top-left-radius: 22px;
+        // border-bottom-left-radius: 22px;
     }
     &.end-date {
-        border-top-right-radius: 22px;
-        border-bottom-right-radius: 22px;
+        background-color: black;
+        // border-top-right-radius: 22px;
+        // border-bottom-right-radius: 22px;
     }
     &.disabled {
         background-color: #f4f4f4;

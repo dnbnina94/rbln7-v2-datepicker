@@ -391,11 +391,17 @@
   cursor: default;
 }
 .v2-picker-panel__range-day.normal {
-  color: #333;
+  color: black;
   cursor: pointer;
 }
 .v2-picker-panel__range-day.normal:hover {
   color: #ff6200;
+}
+.v2-picker-panel__range-day.normal.start-date:hover {
+  background-color: black;
+}
+.v2-picker-panel__range-day.normal.end-date:hover {
+  background-color: black;
 }
 .v2-picker-panel__range-day.today {
   color: #ff6200;
@@ -416,16 +422,13 @@
 .v2-picker-panel__range-day.start-date span,
 .v2-picker-panel__range-day.end-date span {
   color: #fff;
-  background: #ff6200;
-  border-radius: 50%;
+  background: black;
 }
 .v2-picker-panel__range-day.start-date {
-  border-top-left-radius: 22px;
-  border-bottom-left-radius: 22px;
+  background-color: black;
 }
 .v2-picker-panel__range-day.end-date {
-  border-top-right-radius: 22px;
-  border-bottom-right-radius: 22px;
+  background-color: black;
 }
 .v2-picker-panel__range-day.disabled {
   background-color: #f4f4f4;

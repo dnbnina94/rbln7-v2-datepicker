@@ -1,5 +1,7 @@
 <template>
     <transition name="zoom-in-top">
+        <div class="v2-picker-panel-wrap-outer-1">
+            <div class="v2-picker-panel-wrap-outer-2">
             <div class="v2-picker-panel-wrap v2-picker-range-panel-wrap" ref="panel" v-show="shown" :style="position">
                 <short-cuts v-if="shownSideBar" :shortcuts="pickerOptions.shortcuts" @shortcut-click="handleShortcutPick"></short-cuts>
                 <div class="v2-picker-range-panel v2-picker-range__left-panel" :style="{marginLeft: shownSideBar ? '110px' : '0'}">
@@ -77,6 +79,8 @@
                     </date-table>
                 </div>
             </div>
+            </div>
+        </div>
         </transition>
 </template>
 
