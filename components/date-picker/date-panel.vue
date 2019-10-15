@@ -1,5 +1,7 @@
 <template>
     <transition name="zoom-in-top">
+        <div class="v2-picker-panel-wrap-outer-1" v-show="shown">
+        <div class="v2-picker-panel-wrap-outer-2">
         <div class="v2-picker-panel-wrap" v-show="shown" :style="position">
             <short-cuts v-if="shownSideBar" :shortcuts="pickerOptions.shortcuts" @shortcut-click="handleShortcutPick"></short-cuts>
             <div class="v2-picker-panel" :style="{marginLeft: shownSideBar ? '110px' : '0'}">
@@ -31,6 +33,8 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
     </transition>
 </template>
 
