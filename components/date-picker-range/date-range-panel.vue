@@ -4,7 +4,7 @@
             <div class="v2-picker-panel-wrap-outer-2">
             <div class="mobile-dateinfo-wrapper" v-show="shown">
                 <div class="date-info"></div>
-                <div class="cancel-button">Cancel</div>
+                <div class="cancel-button" @click="shown = false">Cancel</div>
             </div>
             <div class="v2-picker-panel-wrap v2-picker-range-panel-wrap" ref="panel" v-show="shown" :style="position">
                 <short-cuts v-if="shownSideBar" :shortcuts="pickerOptions.shortcuts" @shortcut-click="handleShortcutPick"></short-cuts>
