@@ -1,5 +1,6 @@
 <template>
     <transition name="zoom-in-top">
+        <div>
         <div class="mobile-dateinfo-wrapper" v-show="shown">
             <div class="date-info"></div>
             <div class="cancel-button" @click="shown = false">Cancel</div>
@@ -84,6 +85,7 @@
                 </div>
             </div>
             </div>
+        </div>
         </div>
         </transition>
 </template>
