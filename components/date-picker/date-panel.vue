@@ -47,6 +47,9 @@
 <script>
     import locals from 'v2-datepicker/src/locals';
 
+    require("babel-core/register");
+    require("babel-polyfill");
+
     import {
         nextDate, daysOfMonth, isDate, nextYear, nextMonth,
         getDaysOfMonth, getFirstDateOfMonth, getLastDateOfMonth,
@@ -89,8 +92,8 @@
         },
 
         watch: {
-            date (val) {
-                this.initDays();
+            async date (val) {
+                await this.initDays();
             }
         },
 
@@ -103,7 +106,7 @@
                 }
             },
 
-            initDays () {
+            async initDays () {
                 const date = this.date;
 
                 const curYear = date.getFullYear();
@@ -141,7 +144,7 @@
 
                         // disable date
                         if (this.pickerOptions && typeof this.pickerOptions.disabledDate === 'function') {
-                            cell.disabled = this.pickerOptions.disabledDate(cell.date);
+                            cell.disabled = await this.pickerOptions.disabledDate(cell.date);
                         }
 
                         row.push(cell);
@@ -226,11 +229,11 @@
                 }
             },
 
-            clearDate () {
+            async clearDate () {
                 this.selectedDate = '';
                 this.shown = false;
-                this.$nextTick(() => {
-                    this.initDays();
+                await this.$nextTick(async () => {
+                    await this.initDays();
                 });
             }
         },
