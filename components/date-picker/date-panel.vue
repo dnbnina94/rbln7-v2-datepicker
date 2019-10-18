@@ -92,8 +92,8 @@
         },
 
         watch: {
-            async date (val) {
-                await this.initDays();
+            date (val) {
+                this.initDays();
             }
         },
 
@@ -106,7 +106,7 @@
                 }
             },
 
-            async initDays () {
+            initDays () {
                 const date = this.date;
 
                 const curYear = date.getFullYear();
@@ -144,7 +144,7 @@
 
                         // disable date
                         if (this.pickerOptions && typeof this.pickerOptions.disabledDate === 'function') {
-                            cell.disabled = await this.pickerOptions.disabledDate(cell.date);
+                            cell.disabled = this.pickerOptions.disabledDate(cell.date);
                         }
 
                         row.push(cell);
@@ -229,11 +229,11 @@
                 }
             },
 
-            async clearDate () {
+            clearDate () {
                 this.selectedDate = '';
                 this.shown = false;
-                await this.$nextTick(async () => {
-                    await this.initDays();
+                this.$nextTick(() => {
+                    this.initDays();
                 });
             }
         },

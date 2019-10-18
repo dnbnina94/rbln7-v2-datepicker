@@ -12648,7 +12648,7 @@ var _shortcuts2 = _interopRequireDefault(_shortcuts);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; } //
+__webpack_require__(167); //
 //
 //
 //
@@ -12695,7 +12695,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 
-__webpack_require__(167);
 __webpack_require__(169);
 
 exports.default = {
@@ -12734,23 +12733,7 @@ exports.default = {
 
     watch: {
         date: function date(val) {
-            var _this = this;
-
-            return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                _context.next = 2;
-                                return _this.initDays();
-
-                            case 2:
-                            case "end":
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, _this);
-            }))();
+            this.initDays();
         }
     },
 
@@ -12763,101 +12746,52 @@ exports.default = {
             }
         },
         initDays: function initDays() {
-            var _this2 = this;
+            var date = this.date;
 
-            return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                var date, curYear, curMonth, curDate, curDay, firstDateOfMonth, firstWeekDay, daysOfMonth, lastDateOfMonth, mod, diff, panelStartDate, rows, minTime, maxTime, index, i, l, row, j, cell, d, time;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                date = _this2.date;
-                                curYear = date.getFullYear();
-                                curMonth = date.getMonth();
-                                curDate = date.getDate();
-                                curDay = date.getDay();
-                                firstDateOfMonth = (0, _utils.getFirstDateOfMonth)(date);
-                                firstWeekDay = firstDateOfMonth.getDay();
-                                daysOfMonth = (0, _utils.getDaysOfMonth)(curYear, curMonth + 1);
-                                lastDateOfMonth = (0, _utils.getLastDateOfMonth)(date);
-                                mod = (firstWeekDay + 7) % 7;
-                                diff = _this2.renderRow === 6 ? mod : mod + 7;
-                                panelStartDate = new Date(curYear, curMonth, firstDateOfMonth.getDate() - diff);
-                                rows = _this2.initRenderRows();
-                                minTime = firstDateOfMonth.getTime();
-                                maxTime = lastDateOfMonth.getTime();
-                                index = 0;
-                                i = 0, l = rows.length;
+            var curYear = date.getFullYear();
+            var curMonth = date.getMonth();
+            var curDate = date.getDate();
+            var curDay = date.getDay();
 
-                            case 17:
-                                if (!(i < l)) {
-                                    _context2.next = 43;
-                                    break;
-                                }
+            var firstDateOfMonth = (0, _utils.getFirstDateOfMonth)(date);
+            var firstWeekDay = firstDateOfMonth.getDay();
+            var daysOfMonth = (0, _utils.getDaysOfMonth)(curYear, curMonth + 1);
+            var lastDateOfMonth = (0, _utils.getLastDateOfMonth)(date);
+            var mod = (firstWeekDay + 7) % 7;
 
-                                row = rows[i];
-                                j = 0;
+            var diff = this.renderRow === 6 ? mod : mod + 7;
+            var panelStartDate = new Date(curYear, curMonth, firstDateOfMonth.getDate() - diff);
 
-                            case 20:
-                                if (!(j < 7)) {
-                                    _context2.next = 39;
-                                    break;
-                                }
+            var rows = this.initRenderRows();
+            var minTime = firstDateOfMonth.getTime();
+            var maxTime = lastDateOfMonth.getTime();
+            var index = 0;
 
-                                cell = {};
+            for (var i = 0, l = rows.length; i < l; i++) {
+                var row = rows[i];
+                for (var j = 0; j < 7; j++) {
+                    var cell = {};
+                    index = i * 7 + j;
+                    var d = (0, _utils.nextDate)(panelStartDate, index);
+                    var time = d.getTime();
+                    cell.index = index;
+                    cell.text = d.getDate();
+                    cell.type = time < minTime ? 'prev-month' : time > maxTime ? 'next-month' : 'normal';
+                    cell.isToday = time === (0, _utils.getClearHoursTime)(Date.now());
+                    cell.isSelected = (0, _utils.isDate)(this.selectedDate) ? time === (0, _utils.getClearHoursTime)(new Date(this.selectedDate).getTime()) : false;
+                    cell.date = d;
 
-                                index = i * 7 + j;
-                                d = (0, _utils.nextDate)(panelStartDate, index);
-                                time = d.getTime();
-
-                                cell.index = index;
-                                cell.text = d.getDate();
-                                cell.type = time < minTime ? 'prev-month' : time > maxTime ? 'next-month' : 'normal';
-                                cell.isToday = time === (0, _utils.getClearHoursTime)(Date.now());
-                                cell.isSelected = (0, _utils.isDate)(_this2.selectedDate) ? time === (0, _utils.getClearHoursTime)(new Date(_this2.selectedDate).getTime()) : false;
-                                cell.date = d;
-
-                                // disable date
-
-                                if (!(_this2.pickerOptions && typeof _this2.pickerOptions.disabledDate === 'function')) {
-                                    _context2.next = 35;
-                                    break;
-                                }
-
-                                _context2.next = 34;
-                                return _this2.pickerOptions.disabledDate(cell.date);
-
-                            case 34:
-                                cell.disabled = _context2.sent;
-
-                            case 35:
-
-                                row.push(cell);
-
-                            case 36:
-                                j++;
-                                _context2.next = 20;
-                                break;
-
-                            case 39:
-                                rows[i] = row;
-
-                            case 40:
-                                i++;
-                                _context2.next = 17;
-                                break;
-
-                            case 43:
-
-                                _this2.rows = [].concat(rows);
-
-                            case 44:
-                            case "end":
-                                return _context2.stop();
-                        }
+                    // disable date
+                    if (this.pickerOptions && typeof this.pickerOptions.disabledDate === 'function') {
+                        cell.disabled = this.pickerOptions.disabledDate(cell.date);
                     }
-                }, _callee2, _this2);
-            }))();
+
+                    row.push(cell);
+                }
+                rows[i] = row;
+            }
+
+            this.rows = [].concat(rows);
         },
         getCellClasses: function getCellClasses(cell) {
             var classes = ['v2-picker-panel__table-cell', 'v2-picker-panel__day'];
@@ -12926,39 +12860,13 @@ exports.default = {
             }
         },
         clearDate: function clearDate() {
-            var _this3 = this;
+            var _this = this;
 
-            return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                return regeneratorRuntime.wrap(function _callee4$(_context4) {
-                    while (1) {
-                        switch (_context4.prev = _context4.next) {
-                            case 0:
-                                _this3.selectedDate = '';
-                                _this3.shown = false;
-                                _context4.next = 4;
-                                return _this3.$nextTick(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-                                    return regeneratorRuntime.wrap(function _callee3$(_context3) {
-                                        while (1) {
-                                            switch (_context3.prev = _context3.next) {
-                                                case 0:
-                                                    _context3.next = 2;
-                                                    return _this3.initDays();
-
-                                                case 2:
-                                                case "end":
-                                                    return _context3.stop();
-                                            }
-                                        }
-                                    }, _callee3, _this3);
-                                })));
-
-                            case 4:
-                            case "end":
-                                return _context4.stop();
-                        }
-                    }
-                }, _callee4, _this3);
-            }))();
+            this.selectedDate = '';
+            this.shown = false;
+            this.$nextTick(function () {
+                _this.initDays();
+            });
         }
     },
 
@@ -15993,7 +15901,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue__);
 /* harmony namespace reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bbb1f298_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_date_panel_vue__ = __webpack_require__(371);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1b41e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_date_panel_vue__ = __webpack_require__(371);
 var normalizeComponent = __webpack_require__(10)
 /* script */
 
@@ -16010,7 +15918,7 @@ var __vue_scopeId__ = null
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
   __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_vue_loader_lib_selector_type_script_index_0_date_panel_vue___default.a,
-  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_bbb1f298_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_date_panel_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_1b41e230_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_date_panel_vue__["a" /* default */],
   __vue_template_functional__,
   __vue_styles__,
   __vue_scopeId__,
